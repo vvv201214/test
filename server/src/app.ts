@@ -9,8 +9,8 @@ const app = express();
 
 app.use(cors({
     credentials: true,
-    origin: "http://13.233.184.159/", 
-    // origin: "http://localhost:3000", 
+    // origin: "http://13.233.184.159/", 
+    origin: "http://localhost:3000", 
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   }));
 
@@ -23,8 +23,8 @@ app.get('/', (req:Request,res:Response)=>{
 // app.use('/api/v1/roles', roleRoutes);
 // app.use('/api/v1/bioMarkers', bioMarkerRoutes);
 // app.use('/api/v1/units', unitsRoutes);
-app.use('/data', routes);
-app.use('/uploads', uploadRoutes);
+app.use('/api/v1/data', routes);
+app.use('/api/v1/uploads', uploadRoutes);
 // app.use('/api/v1/ocrData', ocrDataRoutes);
 
 if(process.env.NODE_ENV == 'production'){

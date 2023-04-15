@@ -16,7 +16,7 @@ const FileUploader = () => {
   let baseUrl = process.env.NODE_ENV === "production" ? "/" : "http://localhost:8080/"
 
   useEffect(()=>{
-    axios.get(`${baseUrl}data`)
+    axios.get(`${baseUrl}api/v1/data`)
     .then((resp)=>{
       setUploadedData(resp.data.data);
     }).catch((err)=>{
@@ -53,7 +53,7 @@ const FileUploader = () => {
       formData.append('currency', detail.currency);
 
       console.log(formData, file, file.name)
-      const { data } = await axios.post(`${baseUrl}uploads`, formData, {
+      const { data } = await axios.post(`${baseUrl}api/v1/uploads`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -106,7 +106,7 @@ const FileUploader = () => {
             />
           </div>
           <div style={{ width: '50%', display: 'flex', justifyContent: 'center' }}>
-            <button onClick={handleUpload} style={{ padding: '10px 20px', backgroundColor: 'red', color: 'white', fontWeight: 'bold' }}>
+            <button onClick={handleUpload} style={{ padding: '10px 20px', backgroundColor: 'red', color: 'white', fontWeight: 'bold' , cursor: 'pointer'}}>
               Submit
             </button>
           </div>
@@ -116,12 +116,12 @@ const FileUploader = () => {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
-            {uploadedData.map((elem, index) => {
-              console.log(elem.link, elem)
+            {uploadedData?.map((elem, index) => {
+              console.log(elem?.link, elem)
               return (
               <div key={`image-${index+1}`}>
                 <img src={elem?.link} alt="Image" style={{ maxWidth: '60%', height: '60%' }} />
-                <div style={{ fontWeight: 'bold' }}>{`${elem.name}`}</div>
+                <div style={{ fontWeight: 'bold' }}>{`${elem?.name}`}</div>
               </div>
             )})}
           </div>
