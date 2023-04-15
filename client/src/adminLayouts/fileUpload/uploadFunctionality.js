@@ -16,7 +16,7 @@ const FileUploader = () => {
   let baseUrl = process.env.NODE_ENV === "production" ? "/" : "http://localhost:8080/"
 
   useEffect(()=>{
-    axios.get(`${baseUrl}api/v1/data`)
+    axios.get(`${baseUrl}data`)
     .then((resp)=>{
       setUploadedData(resp.data.data);
     }).catch((err)=>{
@@ -53,7 +53,7 @@ const FileUploader = () => {
       formData.append('currency', detail.currency);
 
       console.log(formData, file, file.name)
-      const { data } = await axios.post(`${baseUrl}api/v1/uploads`, formData, {
+      const { data } = await axios.post(`${baseUrl}uploads`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
